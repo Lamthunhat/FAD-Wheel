@@ -2329,13 +2329,6 @@ export default function App() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-2.5">
-                  <Coins className="w-5 h-5 text-[#06D6A0] shrink-0" />
-                  <div>
-                    <span className="font-bold text-stone-800">Giá tham khảo/người: </span>
-                    <span className="font-semibold text-stone-600 bg-stone-50 border border-stone-200 px-2 py-0.5 rounded-lg text-xs">{winningItem.priceRange}</span>
-                  </div>
-                </div>
 
                 {winningItem.branches && winningItem.branches.length > 0 && (
                   <div className="space-y-1.5 border-t border-dashed border-[#2D3047]/15 pt-3 text-left">

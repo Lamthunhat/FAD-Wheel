@@ -879,7 +879,7 @@ export default function App() {
                         : 'bg-white text-stone-700 hover:bg-stone-50'
                     }`}
                   >
-                    🍜 Tất cả
+                    🍜 TẤT CẢ
                   </button>
                   <button
                     id="btn-cat-food"
@@ -891,7 +891,7 @@ export default function App() {
                         : 'bg-white text-stone-700 hover:bg-stone-50'
                     }`}
                   >
-                    🍱 Chỉ món ăn
+                    🍱 QUÁN ĂN
                   </button>
                   <button
                     id="btn-cat-drink"
@@ -903,7 +903,7 @@ export default function App() {
                         : 'bg-white text-stone-700 hover:bg-stone-50'
                     }`}
                   >
-                    🥤 Cà phê/Trà
+                    🥤 QUÁN NƯỚC
                   </button>
                 </div>
 
@@ -989,7 +989,7 @@ export default function App() {
                   Vòng quay định mệnh
                 </h2>
                 <p className="text-xs text-stone-500 font-mono">
-                  Có tất cả <span className="text-[#FF6B35] font-black text-sm">{filteredItems.length}</span> món ăn gặp tiêu chuẩn lọc
+                  Có tất cả <span className="text-[#FF6B35] font-black text-sm">{filteredItems.length}</span> lựa chọn đã lọc
                 </p>
               </div>
 

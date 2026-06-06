@@ -155,7 +155,7 @@ export default function GoogleMapsSearch({
   return (
     <div className="bg-white border-4 border-[#2D3047] rounded-3xl p-5 shadow-[6px_6px_0px_#2D3047]">
       <h2 className="text-base font-black text-[#2D3047] mb-3 flex items-center gap-2">
-        <span className="w-2.5 h-6 bg-[#118AB2] rounded-full"></span> 🔍 Tìm kiếm quán ăn gần đây
+        <span className="w-2.5 h-6 bg-[#118AB2] rounded-full"></span> 🔍 TÌM KIẾM QUÁN ĂN GẦN ĐÂY
       </h2>
 
       <p className="text-[10px] text-stone-500 font-semibold mb-3 leading-relaxed">

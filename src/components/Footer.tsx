@@ -10,7 +10,7 @@ export default function Footer() {
       </div>
       <div className="flex items-center gap-2">
         <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-        AI SẴN SÀNG PHÂN TÍCH VÙNG QUAY MAY MẮN
+        AI SẴN SÀNG PHÂN TÍCH VÒNG QUAY MAY MẮN
       </div>
     </footer>
   );

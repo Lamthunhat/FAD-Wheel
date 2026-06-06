@@ -119,26 +119,6 @@ export default function DetailEditView({
           <h2 className="text-2xl md:text-3xl font-black text-[#2D3047] leading-tight font-serif">
             {editName || selectedDetailItem.name}
           </h2>
-          <p className="text-xs text-stone-500 font-mono mt-1">Sổ tay quán tủ cá nhân (local)</p>
-        </div>
-
-        <div className="flex items-center gap-2">
-          <button
-            id="btn-cancel-edit-top"
-            type="button"
-            onClick={() => setSelectedDetailItem(null)}
-            className="bg-white hover:bg-stone-50 text-[#2D3047] font-black px-4 py-2.5 rounded-xl uppercase text-xs border-4 border-[#2D3047] shadow-[3px_3px_0px_#2D3047] transition-all cursor-pointer text-center"
-          >
-            Hủy bỏ
-          </button>
-          <button
-            id="btn-submit-edit-top"
-            form="edit-detail-food-form"
-            type="submit"
-            className="bg-[#06D6A0] hover:bg-[#12dda7] text-[#2D3047] font-black px-5 py-2.5 rounded-xl uppercase text-xs border-4 border-[#2D3047] shadow-[3px_3px_0px_#2D3047] transition-all cursor-pointer text-center font-sans font-bold"
-          >
-            💾 Lưu thay đổi
-          </button>
         </div>
       </div>
 
@@ -578,7 +558,7 @@ export default function DetailEditView({
                             </button>
                           </div>
                         </div>
-                        <p className="text-xs text-stone-700 font-medium leading-relaxed font-sans">{rev.comment}</p>
+                        <p className="text-xs text-stone-700 font-medium leading-relaxed font-sans whitespace-pre-wrap">{rev.comment}</p>
                       </div>
                     ))
                   ) : (
@@ -587,6 +567,25 @@ export default function DetailEditView({
                     </div>
                   )}
                 </div>
+              </div>
+
+              {/* Bottom action buttons */}
+              <div className="flex items-center justify-end gap-3 pt-6 border-t-2 border-stone-100">
+                <button
+                  id="btn-cancel-edit-bottom"
+                  type="button"
+                  onClick={() => setSelectedDetailItem(null)}
+                  className="bg-white hover:bg-stone-50 text-[#2D3047] font-black px-5 py-2.5 rounded-xl uppercase text-xs border-4 border-[#2D3047] shadow-[3px_3px_0px_#2D3047] transition-all cursor-pointer text-center"
+                >
+                  Hủy bỏ
+                </button>
+                <button
+                  id="btn-submit-edit-bottom"
+                  type="submit"
+                  className="bg-[#06D6A0] hover:bg-[#12dda7] text-[#2D3047] font-black px-6 py-2.5 rounded-xl uppercase text-xs border-4 border-[#2D3047] shadow-[3px_3px_0px_#2D3047] transition-all cursor-pointer text-center font-bold"
+                >
+                  💾 Lưu thay đổi
+                </button>
               </div>
             </div>
           </div>
@@ -653,16 +652,6 @@ export default function DetailEditView({
             >
               🗺️ Tra cứu trên Google Maps
             </a>
-          </div>
-
-          <div className="pt-4 flex flex-col gap-2">
-            <button
-              id="btn-save-edit-bottom"
-              type="submit"
-              className="w-full bg-[#06D6A0] hover:bg-[#12dda7] text-[#2D3047] font-black py-3.5 rounded-xl uppercase text-xs border-4 border-[#2D3047] shadow-[4px_4px_0px_#2D3047] cursor-pointer active:translate-y-0.5 transition-all text-center font-bold"
-            >
-              💾 Lưu tất cả chỉnh sửa
-            </button>
           </div>
         </div>
       </form>

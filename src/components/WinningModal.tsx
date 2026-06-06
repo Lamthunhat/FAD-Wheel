@@ -112,7 +112,7 @@ export default function WinningModal({
                         <span>{"⭐".repeat(rev.rating)}</span>
                         <span>{rev.createdAt}</span>
                       </div>
-                      <p className="font-medium text-stone-700 leading-normal">{rev.comment}</p>
+                      <p className="font-medium text-stone-700 leading-normal whitespace-pre-wrap">{rev.comment}</p>
                     </div>
                   ))}
                 </div>

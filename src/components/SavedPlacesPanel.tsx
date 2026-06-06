@@ -59,7 +59,6 @@ export default function SavedPlacesPanel({
     <div className="w-full bg-white border-4 border-[#2D3047] rounded-3xl p-5 shadow-[4px_4px_0px_#2D3047] flex flex-col justify-start min-h-[460px]">
       <h3 className="text-sm font-black text-[#2D3047] mb-3 uppercase tracking-wider flex items-center justify-between">
         <span>🏪 QUÁN TỦ ĐÃ LƯU ({customItems.length})</span>
-        <span className="text-[9px] text-[#FF6B35] font-black bg-[#FFF1EB] px-2 py-0.5 rounded border border-red-100">local</span>
       </h3>
 
       {/* TWO TABS: Quán ăn & Quán nước */}

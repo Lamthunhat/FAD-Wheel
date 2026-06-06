@@ -8,7 +8,7 @@ import path from "path";
 import mongoose from "mongoose";
 import { GoogleGenAI, Type } from "@google/genai";
 import dotenv from "dotenv";
-import { Place } from "./db/models";
+import { Place } from "./db/models.js";
 
 dotenv.config();
 

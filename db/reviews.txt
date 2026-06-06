@@ -1,0 +1,10 @@
+f1 | 5 | Phở chín cực kỳ ngon, gừng dầm thơm nức mũi! Nước dùng ngọt thanh đúng chất xương hầm. | 01/06/2026 08:30
+f1 | 4 | Quán đông khách quá nên phục vụ hơi chậm một xíu vào giờ cao điểm sáng, nhưng phở vẫn rất ngon. | 02/06/2026 09:15
+f2 | 5 | Bún chả nướng than hoa sả tỏi thơm phức, ăn kèm nem hải sản giòn rụm đúng chất Obama. | 03/06/2026 12:45
+f3 | 5 | Đậu mơ rán giòn tan, mắm tôm pha quất sủi bọt thơm lừng! Ngõ 31 Hàng Khay chật hẹp nhưng đáng thử. | 04/06/2026 13:20
+f4 | 4 | Nước lẩu riêu cua ngọt thanh vị cua đồng thật, nhúng sườn sụn sần sật cực khoái. Giá hơi cao chút. | 05/06/2026 19:30
+d1 | 5 | Kem trứng đánh bông xốp ngậy mịn màng như váng sữa, quyện cà phê phin đậm đà ấm áp tuyệt vời. | 06/06/2026 10:10
+d1 | 5 | Quán cà phê trứng lâu đời nhất Hà Nội, ngõ nhỏ đi vào ấm cúng đậm chất rêu phong phố cổ. | 06/06/2026 15:40
+d2 | 4 | Bạc xỉu cốt dừa đá xay ngọt mát buốt họng, thích hợp giải nhiệt mùa hè nóng bức. | 06/06/2026 16:20
+d3 | 5 | Trà sen Tây Hồ thơm nhẹ nhàng tinh khiết thanh tao, uống trà nóng ngắm hoàng hôn Hồ Tây cực phiêu. | 06/06/2026 17:50
+d6 | 5 | Cà phê muối lớp kem mặn béo ngậy cân bằng vị cà phê đắng đậm đà ngon xuất sắc! | 06/06/2026 14:30

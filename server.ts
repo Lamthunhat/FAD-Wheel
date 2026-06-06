@@ -85,6 +85,11 @@ app.get("/api/health", async (req, res) => {
   });
 });
 
+// Endpoint ping test đơn giản
+app.get("/api/ping", (req, res) => {
+  res.json({ ping: "pong", time: new Date().toISOString() });
+});
+
 // 1. Fetch real-time weather from Open-Meteo for Hanoi (Lat: 21.0285, Lng: 105.8542)
 app.get("/api/weather/hanoi-live", async (req, res) => {
   try {

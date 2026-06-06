@@ -58,7 +58,7 @@ export default function SavedPlacesPanel({
   return (
     <div className="w-full bg-white border-4 border-[#2D3047] rounded-3xl p-5 shadow-[4px_4px_0px_#2D3047] flex flex-col justify-start min-h-[460px]">
       <h3 className="text-sm font-black text-[#2D3047] mb-3 uppercase tracking-wider flex items-center justify-between">
-        <span>🏪 QUÁN TỦ ĐÃ LƯU ({customItems.length})</span>
+        <span>🏪 Quán Tủ Đã Lưu ({customItems.length})</span>
       </h3>
 
       {/* TWO TABS: Quán ăn & Quán nước */}
@@ -70,11 +70,10 @@ export default function SavedPlacesPanel({
             setSavedListActiveType('food');
             setSavedListSubCat('all');
           }}
-          className={`py-2 rounded-xl border-2 border-[#2D3047] font-black text-xs uppercase tracking-wider transition-all shadow-[2.5px_2.5px_0px_#2D3047] cursor-pointer flex items-center justify-center gap-1.5 active:translate-y-0.5 active:shadow-none ${
-            savedListActiveType === 'food'
-              ? 'bg-[#EF476F] text-white'
-              : 'bg-stone-50 text-stone-600 hover:bg-stone-100'
-          }`}
+          className={`py-2 rounded-xl border-2 border-[#2D3047] font-black text-xs uppercase tracking-wider transition-all shadow-[2.5px_2.5px_0px_#2D3047] cursor-pointer flex items-center justify-center gap-1.5 active:translate-y-0.5 active:shadow-none ${savedListActiveType === 'food'
+            ? 'bg-[#EF476F] text-white'
+            : 'bg-stone-50 text-stone-600 hover:bg-stone-100'
+            }`}
         >
           <span>🍱 Quán Ăn</span>
         </button>
@@ -85,11 +84,10 @@ export default function SavedPlacesPanel({
             setSavedListActiveType('drink');
             setSavedListSubCat('all');
           }}
-          className={`py-2 rounded-xl border-2 border-[#2D3047] font-black text-xs uppercase tracking-wider transition-all shadow-[2.5px_2.5px_0px_#2D3047] cursor-pointer flex items-center justify-center gap-1.5 active:translate-y-0.5 active:shadow-none ${
-            savedListActiveType === 'drink'
-              ? 'bg-[#118AB2] text-white'
-              : 'bg-stone-50 text-stone-600 hover:bg-stone-100'
-          }`}
+          className={`py-2 rounded-xl border-2 border-[#2D3047] font-black text-xs uppercase tracking-wider transition-all shadow-[2.5px_2.5px_0px_#2D3047] cursor-pointer flex items-center justify-center gap-1.5 active:translate-y-0.5 active:shadow-none ${savedListActiveType === 'drink'
+            ? 'bg-[#118AB2] text-white'
+            : 'bg-stone-50 text-stone-600 hover:bg-stone-100'
+            }`}
         >
           <span>☕ Quán Nước</span>
         </button>
@@ -150,11 +148,10 @@ export default function SavedPlacesPanel({
                     key={`saved-ward-${ward}`}
                     type="button"
                     onClick={() => toggleSavedListWard(ward)}
-                    className={`flex items-center gap-1 p-1 rounded-sm text-left text-[9px] font-bold truncate transition-all cursor-pointer border-none ${
-                      isChecked
-                        ? 'bg-rose-50/10 text-[#EF476F] font-black'
-                        : 'text-stone-400 bg-transparent'
-                    }`}
+                    className={`flex items-center gap-1 p-1 rounded-sm text-left text-[9px] font-bold truncate transition-all cursor-pointer border-none ${isChecked
+                      ? 'bg-rose-50/10 text-[#EF476F] font-black'
+                      : 'text-stone-400 bg-transparent'
+                      }`}
                   >
                     <span>{isChecked ? '☑' : '☐'}</span>
                     <span className="truncate">{ward.replace(/^Phường\s+/i, '')}</span>
@@ -184,11 +181,10 @@ export default function SavedPlacesPanel({
                   type="button"
                   onClick={handleLocateUser}
                   disabled={isLocating}
-                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-xl border-2 border-[#2D3047] font-black text-[9px] uppercase transition-all shadow-[1.5px_1.5px_0px_#2D3047] active:translate-y-0.5 active:shadow-none cursor-pointer ${
-                    userCoords
-                      ? 'bg-[#06D6A0]/10 text-[#2D3047]'
-                      : 'bg-stone-50 hover:bg-stone-100 text-stone-700'
-                  }`}
+                  className={`flex-1 flex items-center justify-center gap-1.5 py-1.5 px-2.5 rounded-xl border-2 border-[#2D3047] font-black text-[9px] uppercase transition-all shadow-[1.5px_1.5px_0px_#2D3047] active:translate-y-0.5 active:shadow-none cursor-pointer ${userCoords
+                    ? 'bg-[#06D6A0]/10 text-[#2D3047]'
+                    : 'bg-stone-50 hover:bg-stone-100 text-stone-700'
+                    }`}
                 >
                   <MapIcon className="w-3 h-3 text-[#FF6B35]" />
                   {isLocating ? 'Đang lấy...' : (userCoords ? 'Cập nhật định vị' : 'Định vị hiện tại')}
@@ -198,11 +194,10 @@ export default function SavedPlacesPanel({
                   <button
                     type="button"
                     onClick={() => setSortByDistance(!sortByDistance)}
-                    className={`px-2 py-1.5 rounded-xl border-2 border-[#2D3047] font-black text-[9px] uppercase transition-all shadow-[1.5px_1.5px_0px_#2D3047] cursor-pointer flex items-center gap-1 whitespace-nowrap ${
-                      sortByDistance
-                        ? 'bg-[#FF6B35] text-white shadow-none translate-y-0.5'
-                        : 'bg-white hover:bg-stone-50 text-stone-600'
-                    }`}
+                    className={`px-2 py-1.5 rounded-xl border-2 border-[#2D3047] font-black text-[9px] uppercase transition-all shadow-[1.5px_1.5px_0px_#2D3047] cursor-pointer flex items-center gap-1 whitespace-nowrap ${sortByDistance
+                      ? 'bg-[#FF6B35] text-white shadow-none translate-y-0.5'
+                      : 'bg-white hover:bg-stone-50 text-stone-600'
+                      }`}
                   >
                     ⇅ Gần nhất {sortByDistance ? 'ON' : 'OFF'}
                   </button>
@@ -249,11 +244,10 @@ export default function SavedPlacesPanel({
                     <div className="flex items-center gap-1.5 flex-wrap">
                       <h4 className="font-extrabold text-[#2D3047] text-xs inline leading-snug">{item.name}</h4>
                       {item.category && (
-                        <span className={`text-[9px] font-black border px-1.5 py-0.5 rounded-md ${
-                          item.type === 'food'
-                            ? 'bg-[#EF476F]/10 text-[#EF476F] border-[#EF476F]/20'
-                            : 'bg-[#118AB2]/10 text-[#118AB2] border-[#118AB2]/20'
-                        }`}>
+                        <span className={`text-[9px] font-black border px-1.5 py-0.5 rounded-md ${item.type === 'food'
+                          ? 'bg-[#EF476F]/10 text-[#EF476F] border-[#EF476F]/20'
+                          : 'bg-[#118AB2]/10 text-[#118AB2] border-[#118AB2]/20'
+                          }`}>
                           {item.category}
                         </span>
                       )}

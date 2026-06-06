@@ -18,9 +18,9 @@ interface GoogleMapsSearchProps {
   isLocating?: boolean;
 }
 
-export default function GoogleMapsSearch({ 
-  activeItems, 
-  onAddItem, 
+export default function GoogleMapsSearch({
+  activeItems,
+  onAddItem,
   onRemoveItem,
   userCoords = null,
   onLocateUser,
@@ -155,7 +155,7 @@ export default function GoogleMapsSearch({
   return (
     <div className="bg-white border-4 border-[#2D3047] rounded-3xl p-5 shadow-[6px_6px_0px_#2D3047]">
       <h2 className="text-base font-black text-[#2D3047] mb-3 flex items-center gap-2">
-        <span className="w-2.5 h-6 bg-[#118AB2] rounded-full"></span> 🔍 TÌM KIẾM QUÁN ĂN GẦN ĐÂY
+        <span className="w-2.5 h-6 bg-[#118AB2] rounded-full"></span> 🔍 Tìm Kiếm Quán Ăn Gần Đây
       </h2>
 
       <p className="text-[10px] text-stone-500 font-semibold mb-3 leading-relaxed">
@@ -184,11 +184,10 @@ export default function GoogleMapsSearch({
             type="button"
             onClick={onLocateUser}
             disabled={isLocating}
-            className={`flex items-center justify-center gap-1.5 py-2 px-1 rounded-xl border-2 border-[#2D3047] font-black text-[10px] uppercase transition-all shadow-[1.5px_1.5px_0px_#2D3047] active:translate-y-0.5 active:shadow-none cursor-pointer ${
-              userCoords
+            className={`flex items-center justify-center gap-1.5 py-2 px-1 rounded-xl border-2 border-[#2D3047] font-black text-[10px] uppercase transition-all shadow-[1.5px_1.5px_0px_#2D3047] active:translate-y-0.5 active:shadow-none cursor-pointer ${userCoords
                 ? 'bg-[#06D6A0]/10 text-[#2D3047]'
                 : 'bg-white hover:bg-stone-50 text-stone-700'
-            }`}
+              }`}
           >
             <Compass className={`w-3.5 h-3.5 text-[#FF6B35] ${isLocating ? 'animate-spin' : ''}`} />
             <span>{isLocating ? 'Đang đọc...' : (userCoords ? 'Đổi GPS Mới' : 'Định vị GPS')}</span>
@@ -333,20 +332,19 @@ export default function GoogleMapsSearch({
                 : null;
 
               return (
-                <div 
-                  key={item.id} 
-                  className={`p-2.5 rounded-xl border-2 transition-all flex items-start justify-between gap-3 text-xs text-left ${
-                    isImported
+                <div
+                  key={item.id}
+                  className={`p-2.5 rounded-xl border-2 transition-all flex items-start justify-between gap-3 text-xs text-left ${isImported
                       ? 'bg-[#F2FAFC] border-[#118AB2]'
                       : 'bg-[#FFFBF5] border-[#2D3047] hover:bg-white shadow-[2px_2px_0px_#2D3047]'
-                  }`}
+                    }`}
                 >
                   <div className="flex-1 min-w-0">
                     <h4 className="font-extrabold text-[#2D3047] truncate leading-tight flex items-center gap-1">
                       <span>{item.type === 'food' ? '🍱' : '☕'}</span>
                       <span className="truncate">{item.name}</span>
                     </h4>
-                    
+
                     {item.location.addressDetail && (
                       <p className="text-[10px] text-stone-500 font-semibold truncate mt-1 flex items-center gap-1">
                         <MapPin className="w-3.5 h-3.5 text-stone-400 shrink-0" />
@@ -370,11 +368,10 @@ export default function GoogleMapsSearch({
                     id={`btn-import-place-${item.id}`}
                     type="button"
                     onClick={() => toggleItemImport(item)}
-                    className={`shrink-0 flex items-center justify-center p-1.5 rounded-lg border-2 transition-all cursor-pointer ${
-                      isImported
+                    className={`shrink-0 flex items-center justify-center p-1.5 rounded-lg border-2 transition-all cursor-pointer ${isImported
                         ? 'bg-[#06D6A0] text-white border-[#2D3047] shadow-[1px_1px_0px_#2D3047]'
                         : 'bg-white hover:bg-stone-100 text-[#2D3047] border-[#2D3047] shadow-[1.5px_1.5px_0px_#2D3047]'
-                    }`}
+                      }`}
                     title={isImported ? "Xóa khỏi thực đơn" : "Thêm vào thực đơn & bản đồ"}
                   >
                     {isImported ? (

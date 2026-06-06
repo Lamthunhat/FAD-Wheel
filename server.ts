@@ -4,8 +4,6 @@
  */
 
 import express from "express";
-import path from "path";
-import fs from "fs";
 import mongoose from "mongoose";
 import { createServer as createViteServer } from "vite";
 import { GoogleGenAI, Type } from "@google/genai";
@@ -42,58 +40,11 @@ async function connectDB() {
   }
 }
 
-// Load in-memory fallback places
+// In-memory fallback (empty - user adds their own places)
 let fallbackPlaces: any[] = [];
-try {
-  const placesPath = path.join(process.cwd(), 'db', 'places.json');
-  if (fs.existsSync(placesPath)) {
-    const fileData = fs.readFileSync(placesPath, 'utf-8');
-    fallbackPlaces = JSON.parse(fileData);
-    
-    const reviewsPath = path.join(process.cwd(), 'db', 'reviews.txt');
-    if (fs.existsSync(reviewsPath)) {
-      const reviewsData = fs.readFileSync(reviewsPath, 'utf-8');
-      const lines = reviewsData.split('\n');
-      let reviewCounter = 1;
-      for (const line of lines) {
-        const trimmed = line.trim();
-        if (!trimmed || trimmed.startsWith('#')) continue;
-        const parts = trimmed.split('|').map(p => p.trim());
-        if (parts.length >= 3) {
-          const placeId = parts[0];
-          const rating = parseInt(parts[1], 10);
-          const comment = parts[2];
-          const createdAt = parts[3] || new Date().toLocaleString('vi-VN', { hour: '2-digit', minute: '2-digit' });
-          
-          const place = fallbackPlaces.find(p => p.id === placeId);
-          if (place) {
-            if (!place.reviews) place.reviews = [];
-            place.reviews.push({
-              id: `seed_rev_${reviewCounter++}`,
-              rating,
-              comment,
-              createdAt
-            });
-          }
-        }
-      }
-    }
-  }
-} catch (err) {
-  console.error("⚠️ Error loading fallback places:", err);
-}
 
 async function seedDatabaseIfEmpty() {
-  try {
-    const count = await Place.countDocuments();
-    if (count === 0 && fallbackPlaces.length > 0) {
-      console.log("🌱 Database is empty. Auto-seeding default places and reviews to MongoDB...");
-      await Place.insertMany(fallbackPlaces);
-      console.log(`🎉 Auto-seeded ${fallbackPlaces.length} places successfully.`);
-    }
-  } catch (err) {
-    console.error("❌ Failed to auto-seed database:", err);
-  }
+  // No default data - users add their own places via the UI
 }
 
 // Initialize GoogleGenAI client lazily (so we don't crash on startup if key is missing)

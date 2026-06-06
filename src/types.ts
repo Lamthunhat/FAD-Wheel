@@ -41,6 +41,7 @@ export interface WheelItem {
   reviews?: Review[];
   branches?: Branch[];
   category?: string;   // Danh mục món (e.g. bún, cơm, món cuốn, cà phê, trà...)
+  calculatedDistance?: number; // Khoảng cách GPS tính toán động
 }
 
 export interface WeatherInfo {

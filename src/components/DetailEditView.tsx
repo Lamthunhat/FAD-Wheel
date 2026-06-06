@@ -96,6 +96,12 @@ export default function DetailEditView({
   reviewParking,
   setReviewParking
 }: DetailEditViewProps) {
+  React.useEffect(() => {
+    if (selectedDetailItem) {
+      window.scrollTo(0, 0);
+    }
+  }, [selectedDetailItem]);
+
   if (!selectedDetailItem) return null;
 
   return (

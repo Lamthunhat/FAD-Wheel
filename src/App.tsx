@@ -1087,10 +1087,8 @@ export default function App() {
                   Vòng quay tự chia phân độ dựa trên số quán đã được lọc. Có thể click vào <span className="font-bold underline text-[#FF6B35]">QUAY NGAY!</span> hoặc nhấn trực tiếp chiếc mũi tên kim chỉ nam để bắt đầu trò chơi hoang dại.
                 </div>
               </div>
-            </div>
 
-            {/* Saved Custom Places Side Panel */}
-            <div className="lg:col-span-3 w-full flex flex-col gap-6">
+              {/* Saved Custom Places Side Panel */}
               <SavedPlacesPanel
                 customItems={customItems}
                 processedSavedItems={processedSavedItems}
@@ -1114,7 +1112,7 @@ export default function App() {
             </div>
 
             {/* Right Side: AI WEATHER ADVISOR & HISTORY */}
-            <div className="lg:col-span-5 xl:col-span-3 w-full flex flex-col gap-6">
+            <div className="lg:col-span-3 w-full flex flex-col gap-6">
               <ChatbotPanel
                 chatMessages={chatMessages}
                 chatInput={chatInput}

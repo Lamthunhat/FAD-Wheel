@@ -222,6 +222,12 @@ export default function App() {
   const [editReviews, setEditReviews] = useState<Review[]>([]);
   const [newReviewComment, setNewReviewComment] = useState('');
   const [newReviewRating, setNewReviewRating] = useState(5);
+  const [reviewPrice, setReviewPrice] = useState<'rẻ' | 'vừa' | 'đắt'>('vừa');
+  const [reviewQuantity, setReviewQuantity] = useState<'ít' | 'no' | 'nhiều'>('no');
+  const [reviewHygiene, setReviewHygiene] = useState<'sạch sẽ' | 'bẩn'>('sạch sẽ');
+  const [reviewSpace, setReviewSpace] = useState<'rộng rãi - thoáng mát' | 'chật chội - nóng nực'>('rộng rãi - thoáng mát');
+  const [reviewParking, setReviewParking] = useState<'có' | 'không'>('có');
+
 
   // Branches specific states
   const [editBranches, setEditBranches] = useState<Branch[]>([]);
@@ -1239,6 +1245,114 @@ export default function App() {
                           </div>
                         </div>
 
+                        {/* Chọn nhanh tiêu chí trải nghiệm */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 bg-stone-50 border border-stone-200 p-3 rounded-2xl text-[11px] select-none text-left">
+                          {/* Nhóm 1: Giá thành */}
+                          <div className="space-y-1">
+                            <span className="font-bold text-stone-600 block">💰 Giá thành:</span>
+                            <div className="flex gap-1">
+                              {['rẻ', 'vừa', 'đắt'].map((val) => (
+                                <button
+                                  key={val}
+                                  type="button"
+                                  onClick={() => setReviewPrice(val as any)}
+                                  className={`px-2 py-0.5 rounded-md border text-[9px] font-black uppercase cursor-pointer transition-all ${
+                                    reviewPrice === val
+                                      ? 'bg-[#EF476F] text-white border-[#EF476F] shadow-[1px_1px_0px_#2D3047]'
+                                      : 'bg-white text-stone-500 border-stone-200 hover:bg-stone-100'
+                                  }`}
+                                >
+                                  {val}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Nhóm 2: Định lượng/Chất lượng suất ăn */}
+                          <div className="space-y-1">
+                            <span className="font-bold text-stone-600 block">🍽️ Định lượng:</span>
+                            <div className="flex gap-1">
+                              {['ít', 'no', 'nhiều'].map((val) => (
+                                <button
+                                  key={val}
+                                  type="button"
+                                  onClick={() => setReviewQuantity(val as any)}
+                                  className={`px-2 py-0.5 rounded-md border text-[9px] font-black uppercase cursor-pointer transition-all ${
+                                    reviewQuantity === val
+                                      ? 'bg-[#118AB2] text-white border-[#118AB2] shadow-[1px_1px_0px_#2D3047]'
+                                      : 'bg-white text-stone-500 border-stone-200 hover:bg-stone-100'
+                                  }`}
+                                >
+                                  {val}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Nhóm 3: Vệ sinh */}
+                          <div className="space-y-1">
+                            <span className="font-bold text-stone-600 block">✨ Vệ sinh:</span>
+                            <div className="flex gap-1">
+                              {['sạch sẽ', 'bẩn'].map((val) => (
+                                <button
+                                  key={val}
+                                  type="button"
+                                  onClick={() => setReviewHygiene(val as any)}
+                                  className={`px-2 py-0.5 rounded-md border text-[9px] font-black uppercase cursor-pointer transition-all ${
+                                    reviewHygiene === val
+                                      ? 'bg-[#06D6A0] text-[#2D3047] border-[#06D6A0] shadow-[1px_1px_0px_#2D3047]'
+                                      : 'bg-white text-stone-500 border-stone-200 hover:bg-stone-100'
+                                  }`}
+                                >
+                                  {val}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Nhóm 4: Không gian */}
+                          <div className="space-y-1">
+                            <span className="font-bold text-stone-600 block">🏡 Không gian:</span>
+                            <div className="flex gap-1">
+                              {['rộng rãi - thoáng mát', 'chật chội - nóng nực'].map((val) => (
+                                <button
+                                  key={val}
+                                  type="button"
+                                  onClick={() => setReviewSpace(val as any)}
+                                  className={`px-2 py-0.5 rounded-md border text-[9px] font-black uppercase cursor-pointer transition-all ${
+                                    reviewSpace === val
+                                      ? 'bg-[#FF6B35] text-white border-[#FF6B35] shadow-[1px_1px_0px_#2D3047]'
+                                      : 'bg-white text-stone-500 border-stone-200 hover:bg-stone-100'
+                                  }`}
+                                >
+                                  {val === 'rộng rãi - thoáng mát' ? 'rộng' : 'chật'}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+
+                          {/* Nhóm 5: Chỗ để xe */}
+                          <div className="space-y-1">
+                            <span className="font-bold text-stone-600 block">🏍️ Chỗ để xe:</span>
+                            <div className="flex gap-1">
+                              {['có', 'không'].map((val) => (
+                                <button
+                                  key={val}
+                                  type="button"
+                                  onClick={() => setReviewParking(val as any)}
+                                  className={`px-2 py-0.5 rounded-md border text-[9px] font-black uppercase cursor-pointer transition-all ${
+                                    reviewParking === val
+                                      ? 'bg-[#2D3047] text-white border-[#2D3047] shadow-[1px_1px_0px_#2D3047]'
+                                      : 'bg-white text-stone-500 border-stone-200 hover:bg-stone-100'
+                                  }`}
+                                >
+                                  {val}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+
                         <div>
                           <label className="text-[10px] font-black text-stone-500 uppercase tracking-widest block mb-1">
                             Bình Luận / Trải Nghiệm Thực Tế *
@@ -1258,20 +1372,33 @@ export default function App() {
                           type="button"
                           onClick={() => {
                             if (!newReviewComment.trim()) return;
+                            
+                            // Ghép các tiêu chí trải nghiệm được chọn vào nội dung bình luận
+                            const tags = `[Giá: ${reviewPrice} • Suất ăn: ${reviewQuantity} • Vệ sinh: ${reviewHygiene} • Không gian: ${reviewSpace} • Để xe: ${reviewParking}]`;
+                            const finalComment = `${tags}\n${newReviewComment.trim()}`;
+                            
                             const reviewToAdd: Review = {
                               id: 'rev_' + Date.now(),
                               rating: newReviewRating,
-                              comment: newReviewComment.trim(),
+                              comment: finalComment,
                               createdAt: new Date().toLocaleDateString('vi-VN', { hour: '2-digit', minute: '2-digit' })
                             };
                             setEditReviews(prev => [reviewToAdd, ...prev]);
                             setNewReviewComment('');
                             setNewReviewRating(5);
+                            
+                            // Reset các tiêu chí về mặc định
+                            setReviewPrice('vừa');
+                            setReviewQuantity('no');
+                            setReviewHygiene('sạch sẽ');
+                            setReviewSpace('rộng rãi - thoáng mát');
+                            setReviewParking('có');
                           }}
                           className="inline-flex items-center gap-1 bg-[#2D3047] hover:bg-stone-800 text-white font-bold p-2 px-4 rounded-xl text-[10px] uppercase cursor-pointer tracking-wider active:translate-y-0.5 select-none"
                         >
                           ➕ Thêm Đánh Giá
                         </button>
+
                       </div>
 
                       {/* Danh sách các đánh giá cũ gói gọn như phần quán tủ */}

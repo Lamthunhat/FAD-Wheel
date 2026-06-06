@@ -34,7 +34,7 @@ export default function GoogleMapsSearch({
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [results, setResults] = useState<WheelItem[]>([]);
 
-  // Sort search results from nearest to furthest if user coordinates are available
+  // Sắp xếp kết quả tìm kiếm theo khoảng cách gần nhất, nếu cùng khoảng cách (làm tròn 100m) thì xếp theo đánh giá cao nhất
   const sortedResults = React.useMemo(() => {
     if (!userCoords) return results;
     return [...results].sort((a, b) => {
@@ -52,9 +52,31 @@ export default function GoogleMapsSearch({
 
       const distA = calculateDistanceInKm(userCoords.lat, userCoords.lng, aLat!, aLng!);
       const distB = calculateDistanceInKm(userCoords.lat, userCoords.lng, bLat!, bLng!);
+
+      // Làm tròn khoảng cách đến 0.1 km (100 mét)
+      const groupA = Math.round(distA * 10) / 10;
+      const groupB = Math.round(distB * 10) / 10;
+
+      if (groupA !== groupB) {
+        return distA - distB; // Ưu tiên khoảng cách gần hơn
+      }
+
+      // Nếu cùng khoảng cách (chênh lệch dưới 100m), ưu tiên đánh giá trung bình cao nhất
+      const ratingA = a.reviews && a.reviews.length > 0
+        ? a.reviews.reduce((sum, r) => sum + r.rating, 0) / a.reviews.length
+        : 0;
+      const ratingB = b.reviews && b.reviews.length > 0
+        ? b.reviews.reduce((sum, r) => sum + r.rating, 0) / b.reviews.length
+        : 0;
+
+      if (ratingA !== ratingB) {
+        return ratingB - ratingA; // Đánh giá cao hơn xếp trước
+      }
+
       return distA - distB;
     });
   }, [results, userCoords]);
+
 
   // Update manual address name if user coordinates change or to notify about simulated address
   useEffect(() => {

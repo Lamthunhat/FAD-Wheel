@@ -155,7 +155,7 @@ export default function App() {
       {
         id: 'welcome',
         sender: 'bot',
-        text: 'Xin chào! Mình là Trợ Lý Ẩm Thực Hà Nội. 🍜 Hôm nay bạn muốn tìm quán ăn, đồ uống gì trong hòm quán tủ của mình nhỉ? Hãy nhắn tin hỏi mình nhé (ví dụ: "trời lạnh ăn phở tủ nào ngon" hay "Hôm nay trời nóng bức quá dắt người thương đi uống cafe đá ở đâu hợp?")',
+        text: 'Xin chào! Mình là Tú béo đây. 🍜 Hôm nay bạn muốn tìm quán ăn, đồ uống gì trong hòm quán tủ của mình nhỉ? Hãy nhắn tin hỏi mình nhé (ví dụ: "trời lạnh ăn phở tủ nào ngon" hay "Hôm nay trời nóng bức quá dắt người thương đi uống cafe đá ở đâu hợp?")',
         timestamp: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
       }
     ];
@@ -874,24 +874,27 @@ export default function App() {
     <div id="hanoi-foodie-root" className="min-h-screen bg-[#FFF9F2] vintage-grid flex flex-col font-sans select-none relative pb-12">
       
       {/* Header Bar */}
-      <header id="hanoi-header" className="bg-white border-b-4 border-[#FF6B35] flex flex-col sm:flex-row items-center sm:items-center justify-between px-4 py-3 md:px-8 md:py-4 shrink-0 gap-3 md:gap-4 mb-6 shadow-xs">
-        <div className="flex items-center gap-2.5 md:gap-3 w-full sm:w-auto justify-center sm:justify-start">
-          <div className="w-10 h-10 md:w-12 md:h-12 bg-[#FF6B35] rounded-xl flex items-center justify-center border-2 border-[#2D3047] shadow-[2.5px_2.5px_0px_#2D3047] md:shadow-[3px_3px_0px_#2D3047] shrink-0">
-            <UtensilsCrossed className="w-5.5 h-5.5 md:w-7 md:h-7 text-white" />
-          </div>
-          <div className="text-left">
-            <h1 className="text-xl md:text-2xl font-black text-[#2D3047] uppercase tracking-tight leading-tight">
+      <header id="hanoi-header" className="bg-white border-b-4 border-[#FF6B35] flex flex-col sm:flex-row items-start sm:items-center justify-between px-4 py-3 md:px-8 md:py-4 shrink-0 gap-3 md:gap-4 mb-6 shadow-xs">
+        <div className="flex flex-col w-full sm:w-auto text-left gap-1">
+          {/* Hàng 1: Icon Dao Nĩa + Tiêu đề LAMBOM WHEEL */}
+          <div className="flex items-center gap-2.5">
+            <div className="w-9 h-9 md:w-11 md:h-11 bg-[#FF6B35] rounded-xl flex items-center justify-center border-2 border-[#2D3047] shadow-[2px_2px_0px_#2D3047] md:shadow-[3px_3px_0px_#2D3047] shrink-0">
+              <UtensilsCrossed className="w-5 h-5 md:w-6.5 md:h-6.5 text-white" />
+            </div>
+            <h1 className="text-xl md:text-2xl font-black text-[#2D3047] uppercase tracking-tight leading-none">
               LAMBOM WHEEL
             </h1>
-            <p className="text-[9px] md:text-xs font-bold text-[#FF6B35] uppercase tracking-widest flex items-center gap-1 leading-none mt-0.5">
-              <Sparkles className="w-3 h-3 md:w-3.5 md:h-3.5 fill-[#FF6B35]/20 animate-pulse shrink-0" />
-              Vòng quay chọn món cho người OVTK
-            </p>
           </div>
+          
+          {/* Hàng 2: Vòng quay chọn món cho người OVTK */}
+          <p className="text-[9.5px] md:text-xs font-bold text-[#FF6B35] uppercase tracking-widest flex items-center gap-1 leading-none mt-1 pl-0.5">
+            <Sparkles className="w-3.5 h-3.5 fill-[#FF6B35]/20 animate-pulse shrink-0" />
+            Vòng quay chọn món cho người OVTK
+          </p>
         </div>
 
         {/* Header Live Weather Display Badge */}
-        <div className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-end">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-start sm:justify-end mt-1 sm:mt-0">
           <div className="bg-[#E1F2FE] border-2 border-[#118AB2] rounded-full px-4 py-1.5 md:px-5 md:py-2 flex items-center gap-2.5 md:gap-3 shadow-[2.5px_2.5px_0px_#118AB2] md:shadow-[3px_3px_0px_#118AB2]">
             <span className="text-xl md:text-2xl animate-bounce">
               {weather.condition === 'hot' && '🔥'}
@@ -920,6 +923,7 @@ export default function App() {
           </button>
         </div>
       </header>
+
 
 
       {/* Main Grid container */}
@@ -2042,18 +2046,18 @@ export default function App() {
             
             <div className="flex items-center justify-between mb-2">
               <h2 className="text-base font-black flex items-center gap-1.5 uppercase tracking-wide">
-                💬 Trợ Lý Ẩm Thực AI
+                💬 Thư ký Tú Béo
               </h2>
               {chatMessages.length > 1 && (
                 <button
                   id="btn-reset-chat"
                   onClick={() => {
-                    if (confirm("Bạn muốn bắt đầu cuộc hội thoại mới cùng Trợ lý chứ?")) {
+                    if (confirm("Bạn muốn bắt đầu cuộc hội thoại mới cùng thư ký Tú béo chứ?")) {
                       setChatMessages([
                         {
                           id: 'welcome',
                           sender: 'bot',
-                          text: 'Đã làm mới cuộc hội thoại! 🍜 Nhớ kể cho mình sở thích bún, phở, trà đá hay trạng thái thời tiết buổi hẹn để mình gợi ý trúng quán ngon nhé!',
+                          text: 'Xin chào! Mình là Tú béo đây. 🍜 Cuộc hội thoại đã được làm mới, hôm nay bạn muốn tìm quán ăn hay đồ uống gì nào?',
                           timestamp: new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })
                         }
                       ]);
@@ -2090,9 +2094,10 @@ export default function App() {
                 >
                   <div className="flex items-center gap-1">
                     <span className="text-[8px] font-bold text-stone-300 uppercase tracking-wider opacity-60">
-                      {msg.sender === 'user' ? '👤 Bạn' : '✨ Trợ Lý'} • {msg.timestamp}
+                      {msg.sender === 'user' ? '👤 Bạn' : '✨ Thư Ký Tú Béo'} • {msg.timestamp}
                     </span>
                   </div>
+
 
                   <div
                     className={`px-3 py-2 rounded-2xl text-[11px] leading-relaxed break-words font-medium select-text ${

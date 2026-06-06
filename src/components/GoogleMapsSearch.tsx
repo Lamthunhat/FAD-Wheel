@@ -14,6 +14,7 @@ interface GoogleMapsSearchProps {
   onRemoveItem: (id: string) => void;
   userCoords?: { lat: number; lng: number } | null;
   onLocateUser?: () => void;
+  onSetMockLocation?: () => void;
   isLocating?: boolean;
 }
 
@@ -23,6 +24,7 @@ export default function GoogleMapsSearch({
   onRemoveItem,
   userCoords = null,
   onLocateUser,
+  onSetMockLocation,
   isLocating = false
 }: GoogleMapsSearchProps) {
   const [query, setQuery] = useState('');
@@ -173,7 +175,7 @@ export default function GoogleMapsSearch({
           <button
             type="button"
             onClick={() => {
-              if (onLocateUser) onLocateUser();
+              if (onSetMockLocation) onSetMockLocation();
             }}
             className="bg-white hover:bg-stone-50 border-2 border-[#2D3047] text-[#2D3047] font-black text-[10px] py-1.5 px-1 rounded-xl transition-all shadow-[1.5px_1.5px_0px_#2D3047] active:translate-y-0.5 active:shadow-none cursor-pointer uppercase flex items-center justify-center gap-1"
           >

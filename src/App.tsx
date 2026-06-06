@@ -797,6 +797,17 @@ export default function App() {
     });
   };
 
+  const handleSetMockLocation = () => {
+    setUserCoords({ lat: 21.0285, lng: 105.8521 });
+    setSortByDistance(true);
+    
+    const toast = document.createElement('div');
+    toast.className = "fixed bottom-5 right-5 bg-[#118AB2] text-white font-black text-xs px-4 py-3 rounded-xl border-2 border-stone-800 shadow-[3px_3px_0px_#2D3047] z-50 transition-all";
+    toast.innerText = "📍 Đã đặt mốc vị trí tại Hồ Hoàn Kiếm, Hà Nội!";
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2500);
+  };
+
   const handleLocateUser = () => {
     if (!navigator.geolocation) {
       alert("Trình duyệt không hỗ trợ Geolocation.");
@@ -813,26 +824,38 @@ export default function App() {
         setSortByDistance(true);
         
         const toast = document.createElement('div');
-        toast.className = "fixed bottom-5 right-5 bg-emerald-500 text-white font-black text-xs px-4 py-3 rounded-xl border-2 border-stone-800 shadow-[3px_3px_0px_#2D3047] z-50 transition-all";
+        toast.className = "fixed bottom-5 right-5 bg-[#06D6A0] text-white font-black text-xs px-4 py-3 rounded-xl border-2 border-stone-850 shadow-[3px_3px_0px_#2D3047] z-50 transition-all";
         toast.innerText = "✨ Định vị thành công vị trí của bạn!";
         document.body.appendChild(toast);
         setTimeout(() => toast.remove(), 2500);
       },
       (error) => {
-        console.warn("Geocoding failed inside Sandbox context, using high quality mock:", error);
+        console.warn("Geolocation error:", error);
         setIsLocating(false);
+        
+        let errorMsg = "Không thể lấy vị trí GPS.";
+        if (error.code === 1) {
+          errorMsg = "Quyền truy cập vị trí bị từ chối! Vui lòng cho phép định vị trong cài đặt Safari/iOS (Cài đặt -> Quyền riêng tư -> Dịch vụ định vị -> Safari) hoặc bật định vị của điện thoại.";
+        } else if (error.code === 2) {
+          errorMsg = "Không tìm thấy dữ liệu GPS (Vị trí không khả dụng). Hãy thử lại ở nơi thoáng mát hoặc bật mạng.";
+        } else if (error.code === 3) {
+          errorMsg = "Yêu cầu định vị bị hết thời gian (Timeout).";
+        }
+        
+        alert(`❌ Định vị thất bại:\n${errorMsg}\n\nHệ thống sẽ tự động đặt mốc mặc định tại Hồ Hoàn Kiếm, Hà Nội.`);
+        
         // Fallback: Hồ Gươm Hoàn Kiếm centroid
         setUserCoords({ lat: 21.0285, lng: 105.8521 });
         setSortByDistance(true);
-        
-        const toast = document.createElement('div');
-        toast.className = "fixed bottom-5 right-5 bg-amber-500 text-white font-black text-xs px-4 py-3 rounded-xl border-2 border-slate-900 shadow-[4px_4px_0px_#2D3047] z-50 animate-bounce";
-        toast.innerText = "ℹ️ Đã đặt vị trí mô phỏng tại Hồ Hoàn Kiếm để lọc khoảng cách do môi trường thử nghiệm hạn chế!";
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 4000);
+      },
+      {
+        enableHighAccuracy: true,
+        timeout: 8000,
+        maximumAge: 0
       }
     );
   };
+
 
   const toggleAllWardsInDistrict = (wards: string[]) => {
     const hasAll = wards.every(w => selectedWards.includes(w));
@@ -851,26 +874,26 @@ export default function App() {
     <div id="hanoi-foodie-root" className="min-h-screen bg-[#FFF9F2] vintage-grid flex flex-col font-sans select-none relative pb-12">
       
       {/* Header Bar */}
-      <header id="hanoi-header" className="bg-white border-b-4 border-[#FF6B35] flex flex-col md:flex-row items-center justify-between px-8 py-4 shrink-0 gap-4 mb-6 shadow-xs">
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-[#FF6B35] rounded-xl flex items-center justify-center border-2 border-[#2D3047] shadow-[3px_3px_0px_#2D3047] shrink-0">
-            <UtensilsCrossed className="w-7 h-7 text-white" />
+      <header id="hanoi-header" className="bg-white border-b-4 border-[#FF6B35] flex flex-col sm:flex-row items-center sm:items-center justify-between px-4 py-3 md:px-8 md:py-4 shrink-0 gap-3 md:gap-4 mb-6 shadow-xs">
+        <div className="flex items-center gap-2.5 md:gap-3 w-full sm:w-auto justify-center sm:justify-start">
+          <div className="w-10 h-10 md:w-12 md:h-12 bg-[#FF6B35] rounded-xl flex items-center justify-center border-2 border-[#2D3047] shadow-[2.5px_2.5px_0px_#2D3047] md:shadow-[3px_3px_0px_#2D3047] shrink-0">
+            <UtensilsCrossed className="w-5.5 h-5.5 md:w-7 md:h-7 text-white" />
           </div>
-          <div>
-            <h1 className="text-2xl font-black text-[#2D3047] uppercase tracking-tight flex items-center gap-2">
+          <div className="text-left">
+            <h1 className="text-xl md:text-2xl font-black text-[#2D3047] uppercase tracking-tight leading-tight">
               LAMBOM WHEEL
             </h1>
-            <p className="text-xs font-bold text-[#FF6B35] uppercase tracking-widest flex items-center gap-1 leading-none">
-              <Sparkles className="w-3.5 h-3.5 fill-[#FF6B35]/20 animate-pulse" />
+            <p className="text-[9px] md:text-xs font-bold text-[#FF6B35] uppercase tracking-widest flex items-center gap-1 leading-none mt-0.5">
+              <Sparkles className="w-3 h-3 md:w-3.5 md:h-3.5 fill-[#FF6B35]/20 animate-pulse shrink-0" />
               Vòng quay chọn món cho người OVTK
             </p>
           </div>
         </div>
 
         {/* Header Live Weather Display Badge */}
-        <div className="flex items-center gap-2">
-          <div className="bg-[#E1F2FE] border-2 border-[#118AB2] rounded-full px-5 py-2 flex items-center gap-3 shadow-[3px_3px_0px_#118AB2]">
-            <span className="text-2xl animate-bounce">
+        <div className="flex items-center gap-2 w-full sm:w-auto justify-center sm:justify-end">
+          <div className="bg-[#E1F2FE] border-2 border-[#118AB2] rounded-full px-4 py-1.5 md:px-5 md:py-2 flex items-center gap-2.5 md:gap-3 shadow-[2.5px_2.5px_0px_#118AB2] md:shadow-[3px_3px_0px_#118AB2]">
+            <span className="text-xl md:text-2xl animate-bounce">
               {weather.condition === 'hot' && '🔥'}
               {weather.condition === 'sunny' && '☀️'}
               {weather.condition === 'cold' && '❄️'}
@@ -879,9 +902,9 @@ export default function App() {
               {weather.condition === 'windy' && '💨'}
               {weather.condition === 'humid' && '🌫️'}
             </span>
-            <div>
-              <p className="text-[10px] font-bold text-[#118AB2] uppercase tracking-wider leading-none mb-0.5">Thời tiết hiện tại</p>
-              <p className="text-sm font-black text-[#2D3047]">
+            <div className="text-left">
+              <p className="text-[8.5px] md:text-[10px] font-bold text-[#118AB2] uppercase tracking-wider leading-none mb-0.5">Thời tiết hiện tại</p>
+              <p className="text-xs md:text-sm font-black text-[#2D3047] leading-tight">
                 {weather.temp}°C • {getWeatherConditionLabel(weather.condition)}
               </p>
             </div>
@@ -891,12 +914,13 @@ export default function App() {
             id="btn-re-sync-weather"
             title="Đồng bộ lại thời tiết"
             onClick={fetchLiveWeather}
-            className="p-2.5 bg-white border-2 border-[#2D3047] hover:bg-[#FFF9F2] rounded-full shadow-[2px_2px_0px_#2D3047] cursor-pointer"
+            className="p-2 md:p-2.5 bg-white border-2 border-[#2D3047] hover:bg-[#FFF9F2] rounded-full shadow-[2px_2px_0px_#2D3047] cursor-pointer shrink-0"
           >
-            <History className={`w-4 h-4 text-[#2D3047] ${isWeatherLoading ? 'animate-spin' : ''}`} />
+            <History className={`w-3.5 h-3.5 md:w-4 md:h-4 text-[#2D3047] ${isWeatherLoading ? 'animate-spin' : ''}`} />
           </button>
         </div>
       </header>
+
 
       {/* Main Grid container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 md:px-6 grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -1450,6 +1474,7 @@ export default function App() {
             userCoords={userCoords}
             isLocating={isLocating}
             onLocateUser={handleLocateUser}
+            onSetMockLocation={handleSetMockLocation}
           />
 
           {/* Section: Add Custom Place */}

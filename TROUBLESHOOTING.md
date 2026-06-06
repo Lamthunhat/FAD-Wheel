@@ -123,3 +123,49 @@ Dự án được cấu hình chạy ở chế độ **ES Modules (ESM)** (`"typ
 *   **Mở IP Access List:** Luôn luôn đặt IP Access List trên MongoDB Atlas là `0.0.0.0/0` khi kết nối với Vercel.
 *   **Debug thông minh khi không có log:** Nếu Serverless bị crash 500 không rõ nguyên nhân, hãy dùng khối `try/catch` bọc hàm `import()` ở file entry (`api/index.ts`) và trả về JSON chứa `err.stack` cho client.
 *   **Chú ý quy tắc ESM:** Dự án NodeJS có `"type": "module"` cần tuân thủ nghiêm ngặt việc thêm đuôi `.js` vào tất cả các file local tự định nghĩa khi thực hiện `import`.
+
+---
+
+## 6. Lỗi Nhảy Trang / Cuộn Trang Khi Gửi Hoặc Reset Khung Chat AI
+### 🔴 Triệu chứng
+Mỗi khi nhấn nút "Làm mới" cuộc hội thoại hoặc nút "Gửi yêu cầu" trong chatbot AI Thư ký Tú béo, toàn bộ trang web bị cuộn nhảy xuống dưới một đoạn bất ngờ.
+
+### 🔍 Nguyên nhân
+*   Thẻ `<button>` mặc định trong HTML nếu không khai báo thuộc tính `type="button"` sẽ tự động hành xử như một nút `"submit"`. Nếu đặt trong hoặc gần khối giao diện layout dạng lưới, hành vi này có thể kích hoạt các trigger focus/scroll của trình duyệt.
+*   Hiệu ứng `useEffect` tự động cuộn xuống cuối đoạn chat (`chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight`) chạy bất đồng bộ ngay sau khi state thay đổi, xung đột với vị trí cuộn trang hiện tại.
+
+### 🛠️ Cách khắc phục
+1.  Bổ sung tường minh thuộc tính `type="button"` cho tất cả các nút điều khiển trong chatbot (gửi tin, làm mới, tag câu hỏi nhanh).
+2.  Chặn sự kiện submit mặc định bằng `e.preventDefault()`.
+3.  Khi bấm "Làm mới", chủ động đặt cuộn thanh chat về 0 (`scrollTop = 0`) trước khi set lại danh sách tin nhắn để tránh cuộn giật đột ngột.
+
+---
+
+## 7. Lỗi Lọc Địa Điểm Vòng Quay Không Khớp Chi Nhánh Khác
+### 🔴 Triệu chứng
+Người dùng đã thêm chi nhánh của quán ở "Phường Láng", nhưng khi tích lọc chọn phường "Phường Láng" trên vòng quay, quán đó vẫn không xuất hiện nếu địa chỉ chính của nó khai báo ở phường khác (ví dụ: "Phường Ngọc Hà").
+
+### 🔍 Nguyên nhân
+Logic lọc địa điểm ban đầu trên vòng quay chỉ so khớp trường dữ liệu địa chỉ chính `item.location.ward`. Nó bỏ qua mảng các chi nhánh phụ `item.branches`.
+
+### 🛠️ Cách khắc phục
+Cập nhật logic `filteredItems` trong vòng quay giống bộ lọc danh sách quán tủ nâng cao: quét toàn bộ mảng `item.branches` nếu có, so khớp địa chỉ chi nhánh chứa chuỗi tên phường được tích lọc. Nếu khớp bất kỳ cơ sở phụ nào, quán đó vẫn được đưa vào vòng quay.
+
+---
+
+## 8. Lỗi Lệch Khung & Xuống Dòng Chữ "Hà Nội" Trong Chatbot
+### 🔴 Triệu chứng
+Giao diện thanh hiển thị thời tiết nhanh của chatbot AI bị lệch dòng: chữ `🌐 Hà` nằm ở dòng thứ nhất, chữ `Nội:` nằm ở dòng thứ hai làm tổng quan giao diện trông méo mó mất thẩm mỹ.
+
+### 🔍 Nguyên nhân
+Do chiều rộng cột chatbot (`lg:col-span-3` khoảng ~250px) khá chật hẹp. Thuộc tính `flex items-center justify-between` của thẻ cha ép hai khối con sang hai bên. Vì không có thuộc tính chống co giãn (`shrink-0 whitespace-nowrap`), trình duyệt tự động tách chữ "Hà Nội:" tại khoảng trắng để xuống dòng cho vừa chiều ngang.
+
+### 🛠️ Cách khắc phục
+Đưa phần text thành phố và nhiệt độ vào một khối flex riêng biệt được gắn class `whitespace-nowrap shrink-0`:
+```html
+<div className="flex items-center gap-1 shrink-0 whitespace-nowrap">
+  <span>🌐 Hà Nội:</span>
+  <strong className="text-white font-black">{weather.temp}°C</strong>
+</div>
+```
+Và cho phần mô tả thời tiết (`weather.description`) có class `truncate text-right flex-1` để tự động thu gọn bằng dấu ba chấm (`...`) nếu quá dài, tránh xô đẩy cấu trúc hiển thị chính.

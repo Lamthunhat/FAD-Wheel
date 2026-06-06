@@ -24,9 +24,18 @@ lambom-wheel/
 ├── db/
 │   └── models.ts         # Khai báo Schema và Model Mongoose (MongoDB) cho dữ liệu quán ăn.
 ├── src/                  # Mã nguồn của ứng dụng Frontend (React + Vite)
-│   ├── components/       # Các Component UI (LuckyWheel, GoogleMapsSearch,...)
-│   ├── App.tsx           # Component chính quản lý giao diện, state và gọi API.
-│   ├── data.ts           # Dữ liệu tĩnh dự phòng (các phường ở HN, danh mục preset).
+│   ├── components/       # Các Component UI được phân tách mô-đun hóa:
+│   │   ├── AddPlaceForm.tsx      # Form thêm địa điểm quán tủ mới
+│   │   ├── ChatbotPanel.tsx      # Trực quan hóa chatbot AI Thư ký Tú Béo & thông tin thời tiết
+│   │   ├── DetailEditView.tsx    # Trang giao diện quản lý chi tiết và sửa địa điểm (CRUD)
+│   │   ├── Footer.tsx            # Footer của trang web
+│   │   ├── GoogleMapsSearch.tsx  # Tích hợp tìm kiếm địa điểm qua Google Maps API/SerpApi
+│   │   ├── Header.tsx            # Header hiển thị Logo, thời tiết và đồng bộ hóa thời tiết
+│   │   ├── LuckyWheel.tsx        # Vòng quay may mắn Canvas vẽ động
+│   │   ├── SavedPlacesPanel.tsx  # Bộ lọc quán tủ nâng cao và danh sách địa điểm đã lưu
+│   │   └── WinningModal.tsx      # Hộp thoại chúc mừng khi quay trúng địa điểm ăn uống
+│   ├── App.tsx           # Component điều phối chính quản lý state toàn cục.
+│   ├── data.ts           # Dữ liệu tĩnh dự phòng (tọa độ các phường ở HN, danh mục preset).
 │   ├── types.ts          # Khai báo các TypeScript interfaces cho toàn bộ dự án.
 │   └── index.css         # CSS gốc chứa cấu hình theme, phông chữ và hiệu ứng.
 ├── server.ts             # Backend Express server (định nghĩa các API endpoints và Vite dev-middleware).

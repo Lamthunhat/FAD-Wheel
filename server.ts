@@ -12,40 +12,54 @@ import { Place } from "./db/models.js";
 
 dotenv.config();
 
+// Khởi tạo Express app
 const app = express();
 const PORT = 3000;
 
+// Middleware phân tích JSON body cho các API POST/PUT
 app.use(express.json());
 
+// Biến trạng thái để tối ưu hóa kết nối MongoDB (tránh mở nhiều kết nối cùng lúc)
 let isDbConnected = false;
+
+/**
+ * Hàm kết nối cơ sở dữ liệu MongoDB Atlas.
+ * - Sẽ kiểm tra xem MONGODB_URI có tồn tại trong biến môi trường không.
+ * - Sử dụng mongoose để kết nối. Nếu thành công sẽ chuyển trạng thái isDbConnected = true.
+ * - Hàm này được gọi trước mỗi request xử lý dữ liệu để đảm bảo kết nối luôn khả dụng.
+ */
 async function connectDB() {
   if (isDbConnected) return true;
   const dbUri = process.env.MONGODB_URI;
   if (!dbUri) {
+    console.warn("⚠️ MONGODB_URI không tồn tại. Hệ thống sẽ sử dụng bộ nhớ tạm (In-Memory Fallback).");
     return false;
   }
   try {
+    // Nếu mongoose đã có sẵn kết nối từ trước, tận dụng lại kết nối cũ
     if (mongoose.connection.readyState >= 1) {
       isDbConnected = true;
       return true;
     }
     await mongoose.connect(dbUri);
     isDbConnected = true;
-    console.log("✅ MongoDB connected successfully via mongoose.");
+    console.log("✅ Kết nối thành công tới MongoDB Atlas qua mongoose.");
     seedDatabaseIfEmpty().catch(err => console.error("Auto-seed error:", err));
     return true;
   } catch (err) {
-    console.error("❌ MongoDB connection error:", err);
+    console.error("❌ Kết nối MongoDB Atlas thất bại:", err);
     return false;
   }
 }
 
-// In-memory fallback (empty - user adds their own places)
+// Bộ nhớ RAM tạm thời (In-Memory Fallback) phục vụ dữ liệu nếu không thể kết nối Database
 let fallbackPlaces: any[] = [];
 
+// Hàm tự động nạp dữ liệu ban đầu nếu database trống
 async function seedDatabaseIfEmpty() {
-  // No default data - users add their own places via the UI
+  // Hiện tại để trống vì người dùng muốn bắt đầu với một cơ sở dữ liệu rỗng và tự thêm quán tủ
 }
+
 
 // Initialize GoogleGenAI client lazily (so we don't crash on startup if key is missing)
 let aiClient: GoogleGenAI | null = null;

@@ -21,12 +21,12 @@ async function backup() {
     console.log('✅ Connected successfully to MongoDB!');
 
     console.log('📖 Fetching all places from database...');
-    const places = await Place.find({}).lean();
+    const places = await (Place as any).find({}).lean();
     console.log(`📝 Found ${places.length} places in database.`);
 
     const placesPath = path.join(__dirname, 'places.json');
     console.log(`💾 Writing database backup to ${placesPath}...`);
-    
+
     // Clean up MongoDB internal fields (_id and __v) for clean JSON storage
     const cleanedPlaces = places.map((place: any) => {
       const { _id, __v, ...rest } = place;

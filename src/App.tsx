@@ -1355,14 +1355,14 @@ export default function App() {
 
                         <div>
                           <label className="text-[10px] font-black text-stone-500 uppercase tracking-widest block mb-1">
-                            Bình Luận / Trải Nghiệm Thực Tế *
+                            Ghi Chú Trải Nghiệm Thêm (Có thể điền thêm hoặc để trống)
                           </label>
                           <textarea
                             id="form-review-comment"
                             rows={2}
                             value={newReviewComment}
                             onChange={(e) => setNewReviewComment(e.target.value)}
-                            placeholder="Ví dụ: Đồ uống siêu đậm vị, không gian bày trí mang nét cổ kính rêu phong, nhân viên nhiệt tình nhẹ nhàng..."
+                            placeholder="Ví dụ: Đồ uống siêu đậm vị, không gian rộng rãi trang trí cổ kính... (Hoặc để trống nếu chỉ muốn lưu các tiêu chí chọn nhanh ở trên)"
                             className="w-full text-xs font-medium border-2 border-[#2D3047] rounded-xl px-3 py-2.5 bg-[#FAF8F5] focus:bg-white focus:outline-hidden resize-none"
                           />
                         </div>
@@ -1371,11 +1371,10 @@ export default function App() {
                           id="btn-add-review-action"
                           type="button"
                           onClick={() => {
-                            if (!newReviewComment.trim()) return;
-                            
                             // Ghép các tiêu chí trải nghiệm được chọn vào nội dung bình luận
                             const tags = `[Giá: ${reviewPrice} • Suất ăn: ${reviewQuantity} • Vệ sinh: ${reviewHygiene} • Không gian: ${reviewSpace} • Để xe: ${reviewParking}]`;
-                            const finalComment = `${tags}\n${newReviewComment.trim()}`;
+                            const commentText = newReviewComment.trim();
+                            const finalComment = commentText ? `${tags}\n${commentText}` : tags;
                             
                             const reviewToAdd: Review = {
                               id: 'rev_' + Date.now(),
@@ -1384,6 +1383,7 @@ export default function App() {
                               createdAt: new Date().toLocaleDateString('vi-VN', { hour: '2-digit', minute: '2-digit' })
                             };
                             setEditReviews(prev => [reviewToAdd, ...prev]);
+
                             setNewReviewComment('');
                             setNewReviewRating(5);
                             

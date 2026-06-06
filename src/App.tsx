@@ -1201,7 +1201,7 @@ export default function App() {
                               
                               <div className="flex justify-end pt-1">
                                 <a
-                                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${editName} ${br.address}`)}`}
+                                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(br.address)}`}
                                   target="_blank"
                                   referrerPolicy="no-referrer"
                                   className="text-[9px] font-black text-[#118AB2] hover:underline"
@@ -2484,7 +2484,7 @@ export default function App() {
                             <span className="text-stone-500 block text-[10px] mt-0.5 font-medium">📍 {br.address}</span>
                           </div>
                           <a
-                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${winningItem.name} ${br.address}`)}`}
+                            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(br.address)}`}
                             target="_blank"
                             referrerPolicy="no-referrer"
                             className="text-[10px] font-extrabold text-[#118AB2] hover:underline whitespace-nowrap ml-2 shrink-0 bg-white border border-stone-300 px-1.5 py-0.5 rounded-md shadow-[1px_1px_0px_#2D3047] no-underline"

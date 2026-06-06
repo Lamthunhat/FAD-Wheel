@@ -167,12 +167,13 @@ export function getWeatherConditionLabel(condition: WeatherInfo['condition']): s
 
 // Hàm hỗ trợ tạo link tìm kiếm Google Maps năng động cho từng địa điểm
 export function getGoogleMapsSearchUrl(name: string, addressDetail?: string, ward?: string): string {
-  const parts = [
-    name,
-    addressDetail,
-    ward,
-    'Hà Nội'
-  ].filter(Boolean);
-  const query = encodeURIComponent(parts.join(', '));
+  // Nếu có địa chỉ cụ thể, chỉ tìm kiếm theo địa chỉ (tránh đưa tên quán vào làm Google Maps bị lỗi không tìm thấy)
+  const hasSpecificAddress = addressDetail && addressDetail.trim().length > 0;
+  
+  const parts = hasSpecificAddress
+    ? [addressDetail, ward, 'Hà Nội']
+    : [name, ward, 'Hà Nội'];
+
+  const query = encodeURIComponent(parts.filter(Boolean).join(', '));
   return `https://www.google.com/maps/search/?api=1&query=${query}`;
 }

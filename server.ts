@@ -366,7 +366,7 @@ app.get("/api/places", async (req, res) => {
   const connected = await connectDB();
   if (connected) {
     try {
-      const places = await Place.find({});
+      const places = await (Place as any).find({});
       return res.json(places);
     } catch (err) {
       console.error("Error fetching places from MongoDB:", err);
@@ -407,7 +407,7 @@ app.put("/api/places/:id", async (req, res) => {
   const connected = await connectDB();
   if (connected) {
     try {
-      const updatedPlace = await Place.findOneAndUpdate({ id }, updateData, { new: true, upsert: true });
+      const updatedPlace = await (Place as any).findOneAndUpdate({ id }, updateData, { new: true, upsert: true });
       if (updatedPlace) {
         return res.json(updatedPlace);
       }
@@ -431,7 +431,7 @@ app.delete("/api/places/:id", async (req, res) => {
   const connected = await connectDB();
   if (connected) {
     try {
-      const deletedPlace = await Place.findOneAndDelete({ id });
+      const deletedPlace = await (Place as any).findOneAndDelete({ id });
       if (deletedPlace) {
         return res.json({ message: "Xóa địa điểm thành công.", id });
       }
@@ -462,7 +462,7 @@ app.post("/api/weather/recommend", async (req, res) => {
       const connected = await connectDB();
       if (connected) {
         try {
-          items = await Place.find({});
+          items = await (Place as any).find({});
         } catch (err) {
           console.error("Failed to query items for AI recommendation:", err);
           items = fallbackPlaces;
@@ -574,7 +574,7 @@ app.post("/api/advisor/chat", async (req, res) => {
       const connected = await connectDB();
       if (connected) {
         try {
-          items = await Place.find({});
+          items = await (Place as any).find({});
         } catch (err) {
           console.error("Failed to query items for AI advisor:", err);
           items = fallbackPlaces;

@@ -1086,19 +1086,6 @@ export default function App() {
                       />
                     </div>
 
-                    <div>
-                      <label className="text-[10px] font-black text-stone-500 uppercase tracking-widest block mb-1">
-                        Khoảng Giá Thành / Người *
-                      </label>
-                      <input
-                        id="edit-item-price"
-                        type="text"
-                        required
-                        value={editPrice}
-                        onChange={(e) => setEditPrice(e.target.value)}
-                        className="w-full text-xs font-semibold border-2 border-[#2D3047] rounded-xl px-3 py-2.5 bg-white focus:outline-hidden"
-                      />
-                    </div>
 
                     {/* Danh sách các chi nhánh/cơ sở */}
                     <div className="bg-[#FAF8F5] border-2 border-[#2D3047] rounded-3xl p-5 md:p-6 shadow-[4px_4px_0px_#2D3047] md:col-span-2">
@@ -1958,9 +1945,6 @@ export default function App() {
                         </div>
 
                         <div className="flex items-center gap-1.5 text-[9px] font-bold text-stone-600 flex-wrap">
-                          <span className="bg-stone-100 border border-[#2D3047]/15 px-1.5 py-0.5 rounded-sm">
-                            💳 {item.priceRange}
-                          </span>
                           {item.reviews && item.reviews.length > 0 ? (
                             <span className="bg-[#FFFBF5] text-[#EF476F] border border-[#2D3047]/15 px-1.5 py-0.5 rounded-sm flex items-center gap-1">
                               ⭐ {(item.reviews.reduce((acc, r) => acc + r.rating, 0) / item.reviews.length).toFixed(1)} ({item.reviews.length})

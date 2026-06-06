@@ -68,6 +68,24 @@ function getGeminiClient() {
   return aiClient;
 }
 
+// 0. Health check endpoint - kiểm tra kết nối MongoDB
+app.get("/api/health", async (req, res) => {
+  const connected = await connectDB();
+  const mongoState = mongoose.connection.readyState;
+  const stateLabel: Record<number, string> = {
+    0: "disconnected",
+    1: "connected",
+    2: "connecting",
+    3: "disconnecting"
+  };
+  res.json({
+    status: "ok",
+    mongodb: connected ? "✅ Connected" : "❌ Not connected",
+    mongoState: stateLabel[mongoState] ?? "unknown",
+    timestamp: new Date().toISOString()
+  });
+});
+
 // 1. Fetch real-time weather from Open-Meteo for Hanoi (Lat: 21.0285, Lng: 105.8542)
 app.get("/api/weather/hanoi-live", async (req, res) => {
   try {
